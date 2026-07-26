@@ -12,7 +12,7 @@ export default function Home() {
           </div>
           
           <h1 className="h1">
-            Automated Timesheet Software.<br />
+            Frictionless Timesheet Software.<br />
             <span className="text-gradient">Zero Distractions.</span>
           </h1>
           
@@ -108,7 +108,7 @@ export default function Home() {
         <div className="gradient-blob" style={{ bottom: '-20%', right: '10%', width: '40vw', height: '40vw', background: 'var(--brand-glow)', animationDelay: '-2s' }}></div>
         <div className="container flex flex-col items-center text-center">
           <h2 className="h1">Ready to reclaim your time?</h2>
-          <p className="subtitle" style={{ margin: '1.5rem auto 2.5rem auto' }}>Join the remote teams and agencies that have switched to VeloTime's automated timesheet software.</p>
+          <p className="subtitle" style={{ margin: '1.5rem auto 2.5rem auto' }}>Join the remote teams and agencies that have switched to VeloTime's frictionless timesheet software.</p>
           <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '1.25rem 3rem', fontSize: '1.125rem' }}>Get Started Free</a>
         </div>
       </section>

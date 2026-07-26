@@ -8,9 +8,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "VeloTime | Automated Timesheet Software & Privacy-First Time Tracking",
+  title: "VeloTime | Frictionless Timesheet Software & Privacy-First Time Tracking",
   description: "VeloTime is the premium, frictionless time tracking tool for agencies and remote teams. Ditch manual data entry with our privacy-first timesheet software.",
-  keywords: ["automated timesheet software", "privacy-first time tracking", "time tracking for agencies", "no-click time tracking"],
+  keywords: ["frictionless timesheet software", "effortless timesheets", "privacy-first time tracking", "time tracking for agencies", "no-click time tracking"],
   openGraph: {
     title: "VeloTime | Premium Timesheet Software",
     description: "The fastest, frictionless time tracking tool for agencies and remote teams.",
