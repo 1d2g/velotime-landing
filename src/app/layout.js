@@ -56,8 +56,8 @@ export default function RootLayout({ children }) {
               </svg>
               VeloTime
             </a>
-            <div className="flex items-center gap-sm">
-              <a href="https://app.velotime.dg.tools" className="font-medium text-sm hover:text-blue-500 transition-colors">Sign In</a>
+            <div className="flex items-center gap-3">
+              <a href="https://app.velotime.dg.tools" className="btn btn-secondary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }}>Sign In</a>
               <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }}>Start Tracking Free</a>
             </div>
           </div>

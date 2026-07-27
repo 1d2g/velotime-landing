@@ -29,33 +29,13 @@ export default function Home() {
           <div className="glass-panel animate-fade-up delay-200" style={{ marginTop: 'var(--space-xl)', width: '100%', maxWidth: '1000px', height: '500px', padding: '1rem', background: 'var(--bg-secondary)', overflow: 'hidden' }}>
             <div style={{ width: '100%', height: '100%', borderRadius: '16px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)', position: 'relative', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
               
-              {/* Fake UI Header */}
-              <div className="flex items-center justify-between" style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--border-subtle)' }}>
-                <div className="flex items-center gap-2">
-                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ef4444' }}></div>
-                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#eab308' }}></div>
-                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#22c55e' }}></div>
-                </div>
-                <div style={{ fontWeight: 700, fontSize: '0.875rem' }}>Timesheet Matrix</div>
-                <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--bg-tertiary)' }}></div>
-              </div>
-              
-              {/* Fake UI Grid */}
-              <div className="flex" style={{ height: '100%' }}>
-                {/* Fake sidebar dates */}
-                <div style={{ width: '120px', borderRight: '1px solid var(--border-subtle)', padding: '1rem' }}>
-                  <div style={{ height: '3rem', background: 'var(--bg-tertiary)', borderRadius: '8px', marginBottom: '0.5rem' }}></div>
-                  <div style={{ height: '3rem', background: 'var(--bg-tertiary)', borderRadius: '8px', marginBottom: '0.5rem', opacity: 0.7 }}></div>
-                  <div style={{ height: '3rem', background: 'var(--bg-tertiary)', borderRadius: '8px', marginBottom: '0.5rem', opacity: 0.5 }}></div>
-                </div>
-                {/* Fake grid cells */}
-                <div className="flex-1 flex" style={{ padding: '1rem', gap: '0.5rem' }}>
-                  <div className="flex-1" style={{ background: 'var(--brand-glow)', borderRadius: '8px', border: '2px solid var(--brand-primary)', position: 'relative' }}>
-                    <div style={{ position: 'absolute', top: '1rem', left: '0', right: '0', textAlign: 'center', fontWeight: 'bold', color: 'var(--brand-primary)', fontSize: '2rem' }}>4.0</div>
-                  </div>
-                  <div className="flex-1" style={{ background: 'var(--bg-tertiary)', borderRadius: '8px' }}></div>
-                  <div className="flex-1" style={{ background: 'var(--bg-tertiary)', borderRadius: '8px' }}></div>
-                </div>
+              {/* Real UI Screenshot */}
+              <div className="w-full h-full flex items-center justify-center bg-zinc-950">
+                <img 
+                  src="/hero-screenshot.png" 
+                  alt="VeloTime Interface" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+                />
               </div>
 
             </div>
