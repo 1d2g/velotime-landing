@@ -1,3 +1,5 @@
+import InquiryForm from '../components/InquiryForm';
+
 export default function Home() {
   return (
     <>
@@ -90,6 +92,17 @@ export default function Home() {
           <h2 className="h1">Ready to reclaim your time?</h2>
           <p className="subtitle" style={{ margin: '1.5rem auto 2.5rem auto' }}>Join the remote teams and agencies that have switched to VeloTime's frictionless timesheet software.</p>
           <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '1.25rem 3rem', fontSize: '1.125rem' }}>Get Started Free</a>
+        </div>
+      </section>
+
+      {/* Inquiries Section */}
+      <section id="inquire" className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)' }}>
+        <div className="container flex flex-col items-center text-center">
+          <h2 className="h2 mb-4">Questions? Reach Out.</h2>
+          <p className="subtitle mx-auto mb-8" style={{ margin: '0 auto 2rem auto', maxWidth: '600px' }}>
+            Interested in deploying VeloTime for your entire agency? Fill out the form below and we'll get in touch to discuss enterprise features, onboarding, and customized deployments.
+          </p>
+          <InquiryForm />
         </div>
       </section>
     </>
