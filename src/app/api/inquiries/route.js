@@ -24,7 +24,7 @@ export async function POST(req) {
     const resend = new Resend(resendApiKey);
 
     const { data, error } = await resend.emails.send({
-      from: 'VeloTime Inquiries <onboarding@resend.dev>', // Resend test email
+      from: 'VeloTime Inquiries <inquiries@dg.tools>', // Must match verified domain in Resend
       to: 'dgray@dg.tools',
       subject: `New VeloTime Inquiry from ${name}`,
       text: `You have a new inquiry from the VeloTime landing page:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
