@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 // Dynamically generate SEO Metadata for each page
 export async function generateMetadata({ params }) {
-  const competitor = getCompetitor(params.competitor);
+  const resolvedParams = await params;
+  const competitor = getCompetitor(resolvedParams.competitor);
   
   if (!competitor) {
     return { title: 'Not Found' };
@@ -34,8 +35,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ComparePage({ params }) {
-  const competitor = getCompetitor(params.competitor);
+export default async function ComparePage({ params }) {
+  const resolvedParams = await params;
+  const competitor = getCompetitor(resolvedParams.competitor);
 
   if (!competitor) {
     notFound();
