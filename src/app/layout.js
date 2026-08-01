@@ -47,7 +47,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body>
-        <nav className="navbar" style={{ width: '100%', padding: '1.5rem 0', position: 'absolute', top: 0, zIndex: 50 }}>
+        <nav className="navbar" style={{ 
+          width: '100%', 
+          padding: '1rem 0', 
+          position: 'fixed', 
+          top: 0, 
+          zIndex: 50,
+          background: 'var(--glass-bg)',
+          backdropFilter: 'blur(12px)',
+          borderBottom: '1px solid var(--glass-border)'
+        }}>
           <div className="container flex items-center justify-between" style={{ width: '100%' }}>
             <a href="/" className="font-bold text-xl tracking-tight flex items-center gap-2">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--brand-primary)' }}>
@@ -58,12 +67,18 @@ export default function RootLayout({ children }) {
             </a>
             
             <div className="flex items-center gap-md" style={{ color: 'var(--text-secondary)' }}>
-              <a href="/#features" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Features</a>
-              <a href="/#compare" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Compare</a>
+              {/* Hide on mobile, show on tablet+ */}
+              <style>{`
+                @media (max-width: 768px) {
+                  .desktop-only { display: none !important; }
+                }
+              `}</style>
+              <a href="/#features" className="desktop-only" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Features</a>
+              <a href="/#compare" className="desktop-only" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Compare</a>
             </div>
 
             <div className="flex items-center gap-sm">
-              <a href="https://app.velotime.dg.tools" className="btn" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Sign In</a>
+              <a href="https://app.velotime.dg.tools" className="btn desktop-only" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Sign In</a>
               <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }}>Start Free</a>
             </div>
           </div>

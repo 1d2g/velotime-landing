@@ -6,9 +6,12 @@ export default function InquiryForm() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
+    setErrorMessage('');
     
     try {
       const res = await fetch('/api/inquiries', {
@@ -17,12 +20,17 @@ export default function InquiryForm() {
         body: JSON.stringify(formData)
       });
       
-      if (!res.ok) throw new Error('Failed to submit');
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to submit inquiry');
+      }
       
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error(error);
       setStatus('error');
+      setErrorMessage(error.message);
     }
   };
 
@@ -74,7 +82,9 @@ export default function InquiryForm() {
           </div>
           
           {status === 'error' && (
-            <p style={{ color: '#ef4444', fontSize: '0.875rem', textAlign: 'center' }}>Something went wrong. Please try again.</p>
+            <div style={{ color: '#ef4444', fontSize: '0.875rem', fontWeight: 500, marginTop: '0.5rem' }}>
+              Error: {errorMessage || 'Something went wrong. Please try again.'}
+            </div>
           )}
 
           <button 

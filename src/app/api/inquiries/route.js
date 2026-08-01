@@ -23,16 +23,21 @@ export async function POST(req) {
 
     const resend = new Resend(resendApiKey);
 
-    const data = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'VeloTime Inquiries <onboarding@resend.dev>', // Resend test email
       to: 'dgray@dg.tools',
       subject: `New VeloTime Inquiry from ${name}`,
       text: `You have a new inquiry from the VeloTime landing page:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
+    if (error) {
+      console.error("Resend API Error:", error);
+      return NextResponse.json({ error: error.message || 'Failed to send email' }, { status: 400 });
+    }
+
     return NextResponse.json({ success: true, data });
   } catch (error) {
-    console.error("Failed to send inquiry:", error);
+    console.error("Failed to process inquiry:", error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
