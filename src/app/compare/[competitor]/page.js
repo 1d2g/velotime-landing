@@ -51,7 +51,7 @@ export default async function ComparePage({ params }) {
         
         <div className="container flex flex-col items-center text-center animate-fade-up">
           <div className="glass-panel" style={{ padding: '0.5rem 1rem', borderRadius: '100px', marginBottom: 'var(--space-md)', fontSize: '0.875rem', fontWeight: 600, color: 'var(--brand-primary)', border: '1px solid var(--brand-glow)' }}>
-            ✨ The #1 {competitor.name} Alternative
+            ✨ The Frictionless {competitor.name} Alternative
           </div>
           
           <h1 className="h1">

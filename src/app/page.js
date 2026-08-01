@@ -95,6 +95,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Comparisons Section */}
+      <section id="compare" className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="gradient-blob" style={{ bottom: '-10%', right: '-10%', width: '40vw', height: '40vw', background: 'rgba(59, 130, 246, 0.1)' }}></div>
+        <div className="container">
+          <div className="text-center" style={{ marginBottom: 'var(--space-xl)' }}>
+            <h2 className="h2">See how we stack up</h2>
+            <p className="subtitle" style={{ margin: '0 auto' }}>If you are tired of your current software, check out why agencies are switching to VeloTime.</p>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-md)' }}>
+            
+            <a href="/compare/toggl" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>⏱️</div>
+              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Toggl</h3>
+              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
+            </a>
+
+            <a href="/compare/harvest" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>🌾</div>
+              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Harvest</h3>
+              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
+            </a>
+
+            <a href="/compare/hubstaff" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>👁️</div>
+              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Hubstaff</h3>
+              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
+            </a>
+
+            <a href="/compare/clockify" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>⏰</div>
+              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Clockify</h3>
+              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
+            </a>
+            
+          </div>
+        </div>
+      </section>
+
       {/* Inquiries Section */}
       <section id="inquire" className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)' }}>
         <div className="container flex flex-col items-center text-center">
