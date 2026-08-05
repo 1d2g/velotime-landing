@@ -94,7 +94,7 @@ export default function RootLayout({ children }) {
               <a href="/terms" className="hover:text-blue-500">Terms of Service</a>
               <a href="/cookies" className="hover:text-blue-500">Cookie Policy</a>
             </div>
-            //<p className="text-sm mt-4" style={{ color: 'var(--text-tertiary)' }}>&copy; {new Date().getFullYear()} VeloTime Software. All rights reserved.</p>
+            <p className="text-sm mt-4" style={{ color: 'var(--text-tertiary)' }}>VeloTime LLC</p>
           </div>
         </footer>
       </body>
