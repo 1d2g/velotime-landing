@@ -47,17 +47,17 @@ export default async function ComparePage({ params }) {
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 space-y-12">
       
       {/* Hero Header Cell Block */}
-      <section className="grid-cell p-8 sm:p-14 text-center border-2 border-slate-300">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold mb-6">
-          <span className="w-2 h-2 bg-rose-500"></span>
+      <section className="grid-cell p-8 sm:p-14 text-center border-2 border-slate-300 dark:border-zinc-700">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-primary-50 border border-primary-200 text-primary-700 text-xs font-semibold mb-6">
+          <span className="w-2 h-2 bg-primary-500"></span>
           THE FRICTIONLESS ALTERNATIVE
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.12]">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-slate-100 max-w-4xl mx-auto leading-[1.12]">
           Tired of {competitor.name}?<br />Switch to VeloTime.
         </h1>
 
-        <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+        <p className="mt-5 text-base sm:text-lg text-slate-600 dark:text-slate-400 dark:text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
           If you're frustrated by {competitor.weakness}, it's time for an upgrade. VeloTime is the frictionless timesheet tool built specifically for high-performing remote teams.
         </p>
 
@@ -66,7 +66,7 @@ export default async function ComparePage({ params }) {
             <span>Start 14-day free trial</span>
             <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
-          <Link href="/#interactive-matrix" className="w-full sm:w-auto px-7 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs transition-colors">
+          <Link href="/#interactive-matrix" className="w-full sm:w-auto px-7 py-3 bg-slate-100 dark:bg-zinc-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-zinc-700 font-medium text-xs transition-colors">
             See how it works
           </Link>
         </div>
@@ -75,37 +75,37 @@ export default async function ComparePage({ params }) {
       {/* Comparison Split Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 -space-y-px md:space-y-0 md:-space-x-px">
         <div className="grid-cell p-6 sm:p-8">
-          <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 bg-slate-100 inline-block px-2.5 py-1 border border-slate-200">
+          <div className="text-xs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-3 bg-slate-100 dark:bg-zinc-800 inline-block px-2.5 py-1 border border-slate-200">
             {competitor.name.toUpperCase()}
           </div>
-          <h3 className="text-xl font-extrabold text-slate-900 mb-4">Why agencies leave</h3>
-          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-600">
+          <h3 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 mb-4">Why agencies leave</h3>
+          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 dark:text-slate-600">
             <li className="flex items-start gap-2.5 border-b border-slate-100 pb-2.5">
-              <span className="text-slate-400 font-bold shrink-0">✕</span>
+              <span className="text-slate-400 dark:text-slate-600 font-bold shrink-0">✕</span>
               <span>Known for {competitor.focus}.</span>
             </li>
             <li className="flex items-start gap-2.5 border-b border-slate-100 pb-2.5">
-              <span className="text-slate-400 font-bold shrink-0">✕</span>
+              <span className="text-slate-400 dark:text-slate-600 font-bold shrink-0">✕</span>
               <span>Slow, mouse-heavy navigation that annoys engineers.</span>
             </li>
             <li className="flex items-start gap-2.5">
-              <span className="text-slate-400 font-bold shrink-0">✕</span>
+              <span className="text-slate-400 dark:text-slate-600 font-bold shrink-0">✕</span>
               <span>Often results in Friday afternoon "chasing" for compliance.</span>
             </li>
           </ul>
         </div>
 
         <div className="grid-cell-highlight p-6 sm:p-8">
-          <div className="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 bg-rose-100 inline-block px-2.5 py-1 border border-rose-200">
+          <div className="text-xs font-bold text-primary-700 uppercase tracking-wider mb-3 bg-primary-100 inline-block px-2.5 py-1 border border-primary-200">
             VELOTIME
           </div>
-          <h3 className="text-xl font-extrabold text-slate-900 mb-4">The Better Way</h3>
-          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
-            <li className="flex items-start gap-2.5 border-b border-rose-200/60 pb-2.5">
+          <h3 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 mb-4">The Better Way</h3>
+          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+            <li className="flex items-start gap-2.5 border-b border-primary-200/60 pb-2.5">
               <span className="text-emerald-600 font-bold shrink-0">✓</span>
               <span>Lightning-fast spreadsheet matrix (keyboard driven).</span>
             </li>
-            <li className="flex items-start gap-2.5 border-b border-rose-200/60 pb-2.5">
+            <li className="flex items-start gap-2.5 border-b border-primary-200/60 pb-2.5">
               <span className="text-emerald-600 font-bold shrink-0">✓</span>
               <span>Privacy-first philosophy. Trust your team, zero surveillance.</span>
             </li>

@@ -1,77 +1,43 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+import fs from 'fs';
+import path from 'path';
 
-@layer base {
-  body {
-    background-color: #E5E7EB;
-    color: #0F172A;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+function replaceRoseWithPrimary(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  let original = content;
+  
+  content = content.replace(/\brose-([0-9]+)\b/g, 'primary-$1');
+  
+  if (content !== original) {
+    fs.writeFileSync(filePath, content);
+    console.log('Themed', filePath);
   }
 }
 
-@layer components {
-  .tabular-nums {
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* Grid Cell Architecture with Shared Collapsing Borders */
-  .grid-cell {
-    background-color: #FFFFFF;
-    border: 1px solid #CBD5E1;
-    position: relative;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
-  }
-
-  .grid-cell:hover {
-    border-color: #94A3B8;
-    z-index: 2;
-  }
-
-  .grid-cell-highlight {
-    background-color: #FFF1F2;
-    border: 1px solid #FDA4AF;
-  }
-
-  /* Clean Cell Input Engine */
-  .cell-input {
-    font-variant-numeric: tabular-nums;
-    transition: all 0.12s ease;
-    border-radius: 0px !important;
-    outline: none;
-  }
-
-  .cell-input:focus {
-    background-color: #FFF1F2;
-    box-shadow: inset 0 0 0 2px #E11D48;
-    color: #9F1239;
-    font-weight: 700;
+function walkDir(dir) {
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      walkDir(fullPath);
+    } else if (fullPath.endsWith('.jsx') || fullPath.endsWith('.js') || fullPath.endsWith('.tsx') || fullPath.endsWith('.html')) {
+      replaceRoseWithPrimary(fullPath);
+    }
   }
 }
 
-/* Hide number spinner arrows */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-input[type=number] {
-  -moz-appearance: textfield;
-}
+walkDir('c:/Users/4thge/Desktop/dgtools/velotime-landing/src');
 
-/* Custom scrollbar for tables */
-::-webkit-scrollbar {
-  height: 6px;
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #F1F5F9;
-}
-::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-}
+const cssPath = 'c:/Users/4thge/Desktop/dgtools/velotime-landing/src/app/globals.css';
+let cssContent = fs.readFileSync(cssPath, 'utf8');
 
+// Replace hardcoded rose hexes with var(--primary-*)
+cssContent = cssContent.replace(/background-color: #fff1f2;/g, 'background-color: var(--primary-50);');
+cssContent = cssContent.replace(/border: 1px solid #fda4af;/g, 'border: 1px solid var(--primary-300);');
+cssContent = cssContent.replace(/box-shadow: inset 0 0 0 2px #e11d48;/g, 'box-shadow: inset 0 0 0 2px var(--primary-600);');
+cssContent = cssContent.replace(/color: #9f1239;/g, 'color: var(--primary-800);');
+cssContent = cssContent.replace(/color: #e11d48;/g, 'color: var(--primary-600);');
 
+const themeDef = `
 @theme {
   --color-primary-50: var(--primary-50);
   --color-primary-100: var(--primary-100);
@@ -141,4 +107,10 @@ input[type=number] {
   --primary-800: var(--color-amber-800);
   --primary-900: var(--color-amber-900);
   --primary-950: var(--color-amber-950);
+}
+`;
+
+if (!cssContent.includes('@theme {')) {
+  fs.writeFileSync(cssPath, cssContent + '\n' + themeDef);
+  console.log('Updated globals.css with CSS Variables');
 }
