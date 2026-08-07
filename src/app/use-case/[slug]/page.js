@@ -75,6 +75,19 @@ export default async function UseCasePage({ params }) {
           </Link>
         </div>
       </section>
+
+      {/* ================= RELATED LINKS ================= */}
+      <section className="pt-8 border-t-2 border-slate-300 dark:border-zinc-700">
+        <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4 uppercase tracking-wider text-xs">Explore other use cases</h3>
+        <div className="flex flex-wrap gap-2">
+          {useCases.filter(u => u.slug !== useCase.slug).map(u => (
+            <Link key={u.slug} href={`/use-case/${u.slug}`} className="px-3 py-1.5 bg-slate-100 dark:bg-zinc-800 hover:bg-rose-50 dark:hover:bg-rose-900/30 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 text-xs font-medium border border-slate-200 dark:border-zinc-700 transition-colors">
+              {u.name}
+            </Link>
+          ))}
+        </div>
+      </section>
+
     </main>
   );
 }

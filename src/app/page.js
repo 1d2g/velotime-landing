@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { personas } from '../content/personas';
+import { useCases } from '../content/useCases';
 
 export default function Home() {
   const [matrix, setMatrix] = useState([
@@ -362,6 +365,38 @@ export default function Home() {
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ================= EXPLORE SOLUTIONS (SEO INTERNAL LINKS) ================= */}
+      <section className="py-12 max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">Built for how you work</h2>
+          <p className="mt-2 text-slate-600 dark:text-slate-400 text-sm">Explore how VeloTime solves time tracking for different teams and workflows.</p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid-cell p-6 border-2 border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+            <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-3 uppercase tracking-wider text-xs">By Industry & Role</h3>
+            <div className="flex flex-wrap gap-2">
+              {personas.map(p => (
+                <Link key={p.slug} href={`/for/${p.slug}`} className="px-3 py-1.5 bg-slate-100 dark:bg-zinc-800 hover:bg-rose-50 dark:hover:bg-rose-900/30 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 text-xs font-medium border border-slate-200 dark:border-zinc-700 transition-colors">
+                  {p.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+          
+          <div className="grid-cell p-6 border-2 border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+            <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-3 uppercase tracking-wider text-xs">By Problem Solved</h3>
+            <div className="flex flex-wrap gap-2">
+              {useCases.map(u => (
+                <Link key={u.slug} href={`/use-case/${u.slug}`} className="px-3 py-1.5 bg-slate-100 dark:bg-zinc-800 hover:bg-rose-50 dark:hover:bg-rose-900/30 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 text-xs font-medium border border-slate-200 dark:border-zinc-700 transition-colors">
+                  {u.name}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

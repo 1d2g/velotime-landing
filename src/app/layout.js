@@ -1,6 +1,10 @@
 import './globals.css';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import ThemeCycler from '@/components/ThemeCycler';
+import { competitors } from '../content/competitors';
+import { personas } from '../content/personas';
+import { useCases } from '../content/useCases';
+import { features } from '../content/features';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -94,32 +98,85 @@ export default function RootLayout({ children }) {
         {/* MAIN CONTENT (Handled by pages) */}
         {children}
 
-        {/* FOOTER */}
-        <footer className="mt-16 py-8 bg-white dark:bg-zinc-900 border-t-2 border-slate-300 dark:border-zinc-700 text-slate-600 dark:text-slate-400 dark:text-slate-600 text-xs">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            
-            <div className="flex items-center gap-2.5">
-              <svg className="w-6 h-6 shrink-0" viewBox="0 0 200 200" fill="none">
-                <rect width="200" height="200" fill="#0F172A"/>
-                <path d="M 60 48 L 140 48 L 155 63 L 155 72 H 45 V 63 Z" fill="#F43F5E"/>
-                <path d="M 90 72 H 110 V 94 H 90 Z" fill="#F43F5E"/>
-                <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
-              </svg>
-              <span className="font-bold text-xs tracking-[0.18em] uppercase font-sans">
-                <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-rose-600">TIME</span>
-              </span>
+        {/* FAT FOOTER */}
+        <footer className="mt-16 py-12 bg-white dark:bg-zinc-900 border-t-2 border-slate-300 dark:border-zinc-700 text-slate-600 dark:text-slate-400 text-xs">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-b border-slate-200 dark:border-zinc-800 pb-12">
+              
+              {/* Column 1: Compare */}
+              <div>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Compare</h4>
+                <ul className="space-y-2.5">
+                  {competitors.map(c => (
+                    <li key={c.slug}>
+                      <a href={`/compare/${c.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">VeloTime vs {c.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 2: Solutions For */}
+              <div>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Solutions For</h4>
+                <ul className="space-y-2.5">
+                  {personas.map(p => (
+                    <li key={p.slug}>
+                      <a href={`/for/${p.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">{p.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 3: Use Cases */}
+              <div>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Use Cases</h4>
+                <ul className="space-y-2.5">
+                  {useCases.map(u => (
+                    <li key={u.slug}>
+                      <a href={`/use-case/${u.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">{u.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Column 4: Features */}
+              <div>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Features</h4>
+                <ul className="space-y-2.5">
+                  {features.map(f => (
+                    <li key={f.slug}>
+                      <a href={`/features/${f.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">{f.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
             </div>
 
-            <div className="flex items-center gap-5 text-slate-600 dark:text-slate-400 dark:text-slate-600 font-medium">
-              <a href="/privacy" className="hover:text-slate-900 dark:text-slate-100 transition-colors">Privacy</a>
-              <a href="/terms" className="hover:text-slate-900 dark:text-slate-100 transition-colors">Terms</a>
-              <a href="/cookies" className="hover:text-slate-900 dark:text-slate-100 transition-colors">Cookies</a>
-            </div>
+            {/* Bottom Bar */}
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2.5">
+                <svg className="w-6 h-6 shrink-0" viewBox="0 0 200 200" fill="none">
+                  <rect width="200" height="200" fill="#0F172A"/>
+                  <path d="M 60 48 L 140 48 L 155 63 L 155 72 H 45 V 63 Z" fill="#F43F5E"/>
+                  <path d="M 90 72 H 110 V 94 H 90 Z" fill="#F43F5E"/>
+                  <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
+                </svg>
+                <span className="font-bold text-xs tracking-[0.18em] uppercase font-sans">
+                  <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-rose-600">TIME</span>
+                </span>
+              </div>
 
-            <div className="text-slate-500 dark:text-slate-500 font-sans">
-              &copy; {new Date().getFullYear()} VeloTime Software
-            </div>
+              <div className="flex items-center gap-5 text-slate-600 dark:text-slate-400 font-medium">
+                <a href="/privacy" className="hover:text-slate-900 dark:text-slate-100 transition-colors">Privacy</a>
+                <a href="/terms" className="hover:text-slate-900 dark:text-slate-100 transition-colors">Terms</a>
+                <a href="/cookies" className="hover:text-slate-900 dark:text-slate-100 transition-colors">Cookies</a>
+              </div>
 
+              <div className="text-slate-500 font-sans">
+                &copy; {new Date().getFullYear()} VeloTime Software
+              </div>
+            </div>
           </div>
         </footer>
       </body>
