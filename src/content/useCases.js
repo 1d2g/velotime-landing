@@ -23,6 +23,7 @@ export const useCases = [
     copyAngle: 'Log your entire week without touching your mouse. The fastest spreadsheet matrix designed for power users.',
     highlight: 'Built by developers who hate admin work.',
   },
+  /*
   {
     slug: 'capacity-planning',
     name: 'Team Capacity Planning',
@@ -35,6 +36,7 @@ export const useCases = [
     copyAngle: 'Timesheets suck. Let VeloTime automate the tedious parts with recurring assignments and hotkeys.',
     highlight: 'The ultimate anti-timesheet timesheet.',
   }
+  */
 ];
 
 export function getUseCase(slug) {

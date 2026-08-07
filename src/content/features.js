@@ -17,6 +17,7 @@ export const features = [
     highlight: 'Accurate timesheets lead directly to accurate profitability insights.',
     detail: 'Because VeloTime is so frictionless, your data is actually complete. Instantly view true project profitability.',
   },
+  /*
   {
     slug: 'client-invoicing',
     name: 'One-Click Invoicing',
@@ -35,6 +36,7 @@ export const features = [
     highlight: 'Track time on a train. It syncs when you reconnect.',
     detail: 'Never lose a timesheet to a spotty internet connection again. VeloTime caches your entries locally until you\'re back online.',
   }
+  */
 ];
 
 export function getFeature(slug) {
