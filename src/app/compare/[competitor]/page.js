@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
     return { title: 'Not Found' };
   }
 
-  const title = `VeloTime vs ${competitor.name} | The Frictionless Alternative`;
+  const title = `VeloTime vs ${competitor.name} | The $5/m Frictionless Alternative`;
   const description = `Looking for an alternative to ${competitor.name}? Stop dealing with ${competitor.weakness} and switch to VeloTime for frictionless time tracking.`;
 
   return {
@@ -99,19 +99,19 @@ export default async function ComparePage({ params }) {
           <div className="text-xs font-bold text-primary-700 uppercase tracking-wider mb-3 bg-primary-100 inline-block px-2.5 py-1 border border-primary-200">
             VELOTIME
           </div>
-          <h3 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 mb-4">The Better Way</h3>
-          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-            <li className="flex items-start gap-2.5 border-b border-primary-200/60 pb-2.5">
-              <span className="text-emerald-600 font-bold shrink-0">✓</span>
-              <span>Lightning-fast spreadsheet matrix (keyboard driven).</span>
+          <h3 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 mb-4">The Frictionless Way</h3>
+          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 dark:text-slate-600">
+            <li className="flex items-start gap-2.5 border-b border-slate-200 dark:border-zinc-800 pb-2.5">
+              <span className="text-primary-500 font-bold shrink-0">✓</span>
+              <span>10-second weekly logging grid.</span>
             </li>
-            <li className="flex items-start gap-2.5 border-b border-primary-200/60 pb-2.5">
-              <span className="text-emerald-600 font-bold shrink-0">✓</span>
-              <span>Privacy-first philosophy. Trust your team, zero surveillance.</span>
+            <li className="flex items-start gap-2.5 border-b border-slate-200 dark:border-zinc-800 pb-2.5">
+              <span className="text-primary-500 font-bold shrink-0">✓</span>
+              <span>100% keyboard navigable. Never touch the mouse.</span>
             </li>
             <li className="flex items-start gap-2.5">
-              <span className="text-emerald-600 font-bold shrink-0">✓</span>
-              <span>Achieve near 100% compliance without nagging.</span>
+              <span className="text-primary-500 font-bold shrink-0">✓</span>
+              <span>Teams actually submit their hours without being asked.</span>
             </li>
           </ul>
         </div>
