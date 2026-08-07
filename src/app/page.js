@@ -1,149 +1,433 @@
-import InquiryForm from '../components/InquiryForm';
+"use client";
+
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <>
-      <div className="gradient-blob" style={{ top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'var(--brand-glow)' }}></div>
-      <div className="gradient-blob" style={{ top: '20%', right: '-20%', width: '40vw', height: '40vw', background: 'rgba(139, 92, 246, 0.15)', animationDelay: '-5s' }}></div>
-      
-      {/* Hero Section */}
-      <section className="section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
-        <div className="container flex flex-col items-center text-center animate-fade-up">
-          <div className="glass-panel" style={{ padding: '0.5rem 1rem', borderRadius: '100px', marginBottom: 'var(--space-md)', fontSize: '0.875rem', fontWeight: 600, color: 'var(--brand-primary)', border: '1px solid var(--brand-glow)' }}>
-            ✨ The Future of Time Tracking is Frictionless
-          </div>
-          
-          <h1 className="h1">
-            Frictionless Timesheet Software.<br />
-            <span className="text-gradient">Zero Distractions.</span>
-          </h1>
-          
-          <p className="subtitle mt-4 mb-8" style={{ margin: '1.5rem auto 2.5rem auto' }}>
-            VeloTime is the premium, privacy-first time tracking tool built for agencies and high-performing remote teams. Log hours effortlessly without invasive monitoring.
-          </p>
-          
-          <div className="flex items-center justify-center gap-md">
-            <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.125rem' }}>Start Free Trial</a>
-            <a href="#features" className="btn btn-secondary" style={{ padding: '1rem 2.5rem', fontSize: '1.125rem' }}>Explore Features</a>
-          </div>
-          
-          {/* Dashboard Preview Mockup */}
-          <div className="glass-panel animate-fade-up delay-200" style={{ marginTop: 'var(--space-xl)', width: '100%', maxWidth: '1000px', height: '500px', padding: '1rem', background: 'var(--bg-secondary)', overflow: 'hidden' }}>
-            <div style={{ width: '100%', height: '100%', borderRadius: '16px', background: 'var(--bg-primary)', border: '1px solid var(--border-subtle)', position: 'relative', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
-              
-              {/* Real UI Screenshot */}
-              <div className="w-full h-full flex items-center justify-center bg-zinc-950">
-                <img 
-                  src="/hero-screenshot.png" 
-                  alt="VeloTime Interface" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
-                />
-              </div>
+  const [matrix, setMatrix] = useState([
+    [4.0, 6.5, 8.0, 5.0, 2.5],
+    [3.5, 1.5, 0.0, 3.0, 4.0],
+    [1.0, 0.0, 0.5, 0.0, 1.5],
+  ]);
 
+  const handleMatrixChange = (row, col, value) => {
+    const newMatrix = [...matrix];
+    newMatrix[row][col] = value === '' ? 0 : parseFloat(value);
+    setMatrix(newMatrix);
+  };
+
+  const getRowTotal = (row) => matrix[row].reduce((a, b) => a + (b || 0), 0);
+  const getGrandTotal = () => matrix.reduce((sum, row) => sum + row.reduce((a, b) => a + (b || 0), 0), 0);
+
+  // Inquiry Form State
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formStatus, setFormStatus] = useState('idle'); // idle, loading, success, error
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleInquiry = async (e) => {
+    e.preventDefault();
+    setFormStatus('loading');
+    setErrorMessage('');
+    
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: `Team Size: ${formData.teamSize || '1-10'}` // We use message field to store team size since backend expects message
+        })
+      });
+      
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to submit inquiry');
+      }
+      
+      setFormStatus('success');
+      setFormData({ name: '', email: '', teamSize: '1 - 10 employees' });
+    } catch (error) {
+      setFormStatus('error');
+      setErrorMessage(error.message);
+    }
+  };
+
+  return (
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-12">
+      
+      {/* ================= HERO SECTION ================= */}
+      <section id="hero-section" className="space-y-6">
+        
+        {/* Hero Header Cell Block */}
+        <div className="grid-cell p-8 sm:p-14 text-center border-2 border-slate-300">
+          
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold mb-6">
+            <span className="w-2 h-2 bg-rose-500"></span>
+            COMPLIANCE WITHOUT THE CHASE
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.12]">
+            Timesheets your team won't hate filling out.
+          </h1>
+
+          <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+            VeloTime swaps clunky stopwatches and multi-step forms for a spreadsheet-fast matrix. Zero friction for your team, zero Friday chasing for you.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="https://app.velotime.dg.tools" className="w-full sm:w-auto px-7 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 border border-slate-900">
+              <span>Start 14-day free trial</span>
+              <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <a href="#interactive-matrix" className="w-full sm:w-auto px-7 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs transition-colors">
+              Test 10-second sandbox
+            </a>
+          </div>
+
+          <div className="mt-12 pt-6 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-3 -space-y-px sm:space-y-0 sm:-space-x-px text-xs text-slate-700">
+            <div className="grid-cell p-4 flex flex-col items-center justify-center bg-slate-50/50">
+              <span className="font-extrabold text-emerald-600 text-xl tabular-nums">98.4%</span>
+              <span className="font-medium text-slate-600 mt-1">Friday On-Time Completion</span>
+            </div>
+            <div className="grid-cell p-4 flex flex-col items-center justify-center bg-slate-50/50">
+              <span className="font-extrabold text-slate-900 text-xl tabular-nums">&lt; 10s</span>
+              <span className="font-medium text-slate-600 mt-1">Avg Log Speed per Week</span>
+            </div>
+            <div className="grid-cell p-4 flex flex-col items-center justify-center bg-slate-50/50">
+              <span className="font-extrabold text-slate-900 text-xl tabular-nums">0</span>
+              <span className="font-medium text-slate-600 mt-1">Slack Reminders Needed</span>
             </div>
           </div>
+
         </div>
+
+        {/* ================= CLEANED-UP DEMO MATRIX SANDBOX ================= */}
+        <div id="interactive-matrix" className="grid-cell p-5 sm:p-7 text-left border-2 border-slate-300">
+          
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 bg-rose-500 animate-pulse"></span>
+              <span className="text-xs font-bold text-slate-900 tracking-wider uppercase font-sans">INTERACTIVE WEEKLY MATRIX</span>
+              <span className="text-[10px] font-mono font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 border border-rose-200 hidden sm:inline-block">TRY EDITING HOURS</span>
+            </div>
+            <span className="text-xs text-slate-500 font-mono hidden sm:inline-block">Hotkeys: <code className="bg-slate-100 px-1.5 py-0.5 border border-slate-300 text-slate-800">Tab</code> to advance</span>
+          </div>
+
+          <div className="overflow-x-auto border border-slate-300 bg-white">
+            <table className="w-full text-left text-xs border-collapse min-w-[650px]">
+              <thead>
+                <tr className="border-b border-slate-300 text-slate-600 uppercase tracking-wider bg-slate-100 text-[11px] font-bold">
+                  <th className="p-3 border-r border-slate-300 w-5/12">Project / Task</th>
+                  <th className="p-3 text-center border-r border-slate-300 w-14">Mon</th>
+                  <th className="p-3 text-center border-r border-slate-300 w-14">Tue</th>
+                  <th className="p-3 text-center border-r border-slate-300 w-14">Wed</th>
+                  <th className="p-3 text-center border-r border-slate-300 w-14">Thu</th>
+                  <th className="p-3 text-center border-r border-slate-300 w-14">Fri</th>
+                  <th className="p-3 text-right pr-4 bg-slate-200/50 text-slate-900 font-extrabold w-20">Total</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                
+                {/* Row 1 */}
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="p-3 border-r border-slate-200">
+                    <div className="font-bold text-slate-900 text-xs">Acme Corp &bull; Web Application</div>
+                    <div className="text-[11px] text-slate-500 font-mono">React Matrix Components</div>
+                  </td>
+                  {[0, 1, 2, 3, 4].map((col) => (
+                    <td key={col} className="p-0 border-r border-slate-200">
+                      <input 
+                        type="number" step="0.5" min="0" 
+                        value={matrix[0][col] === 0 ? '' : matrix[0][col]} 
+                        onChange={(e) => handleMatrixChange(0, col, e.target.value)}
+                        className="cell-input w-full h-11 text-center bg-transparent text-slate-800 text-xs" 
+                      />
+                    </td>
+                  ))}
+                  <td className="p-3 text-right pr-4 font-bold text-rose-600 tabular-nums bg-rose-50/30">{getRowTotal(0).toFixed(1)}h</td>
+                </tr>
+
+                {/* Row 2 */}
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="p-3 border-r border-slate-200">
+                    <div className="font-bold text-slate-900 text-xs">Stripe &bull; API Integration</div>
+                    <div className="text-[11px] text-slate-500 font-mono">Webhook Endpoint Audit</div>
+                  </td>
+                  {[0, 1, 2, 3, 4].map((col) => (
+                    <td key={col} className="p-0 border-r border-slate-200">
+                      <input 
+                        type="number" step="0.5" min="0" 
+                        value={matrix[1][col] === 0 ? '' : matrix[1][col]} 
+                        onChange={(e) => handleMatrixChange(1, col, e.target.value)}
+                        className="cell-input w-full h-11 text-center bg-transparent text-slate-800 text-xs" 
+                      />
+                    </td>
+                  ))}
+                  <td className="p-3 text-right pr-4 font-bold text-rose-600 tabular-nums bg-rose-50/40">{getRowTotal(1).toFixed(1)}h</td>
+                </tr>
+
+                {/* Row 3 */}
+                <tr className="hover:bg-slate-50/80 transition-colors">
+                  <td className="p-3 border-r border-slate-200">
+                    <div className="font-bold text-slate-900 text-xs">Internal &bull; Sprint Planning</div>
+                    <div className="text-[11px] text-slate-500 font-mono">Architecture & Roadmap</div>
+                  </td>
+                  {[0, 1, 2, 3, 4].map((col) => (
+                    <td key={col} className="p-0 border-r border-slate-200">
+                      <input 
+                        type="number" step="0.5" min="0" 
+                        value={matrix[2][col] === 0 ? '' : matrix[2][col]} 
+                        onChange={(e) => handleMatrixChange(2, col, e.target.value)}
+                        className="cell-input w-full h-11 text-center bg-transparent text-slate-800 text-xs" 
+                      />
+                    </td>
+                  ))}
+                  <td className="p-3 text-right pr-4 font-bold text-rose-600 tabular-nums bg-rose-50/40">{getRowTotal(2).toFixed(1)}h</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-3 pt-3 flex items-center justify-between text-xs text-slate-600 font-sans border-t border-slate-200">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="font-medium">Total Billable Hours Logged</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-slate-700">Weekly Total:</span>
+              <span className="font-extrabold text-slate-900 bg-slate-100 px-3.5 py-1 border border-slate-300 tabular-nums text-sm">{getGrandTotal().toFixed(1)} hrs</span>
+            </div>
+          </div>
+
+        </div>
+
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="section" style={{ background: 'var(--bg-secondary)' }}>
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: 'var(--space-xl)' }}>
-            <h2 className="h2">Engineered for Focus</h2>
-            <p className="subtitle mx-auto" style={{ margin: '0 auto' }}>
-              We stripped away the clunky timers and replaced them with a lightning-fast, keyboard-driven matrix. Time tracking for agencies has never been this fluid.
+      {/* ================= THE FRIDAY PROBLEM ================= */}
+      <section id="why-adoption" className="space-y-4 pt-2">
+        
+        <div className="grid-cell p-6 text-center border-2 border-slate-300">
+          <span className="text-xs font-bold text-rose-600 tracking-wider uppercase">THE FRIDAY FRUSTRATION</span>
+          <h2 className="mt-1 text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Why timesheets usually fail.</h2>
+          <p className="mt-2 text-slate-600 text-sm max-w-xl mx-auto">
+            Most time tracking tools rely on live stopwatches and complex forms that employees resist using.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 -space-y-px md:space-y-0 md:-space-x-px">
+          <div className="grid-cell p-6 sm:p-8">
+            <div className="text-xs font-bold text-red-600 uppercase tracking-wider mb-3 bg-red-50 inline-block px-2.5 py-1 border border-red-200">
+              TRADITIONAL TOOLS
+            </div>
+            <h3 className="text-xl font-extrabold text-slate-900">The Friday Chasing Cycle</h3>
+            <ul className="mt-4 space-y-3.5 text-xs sm:text-sm text-slate-600">
+              <li className="flex items-start gap-2.5 border-b border-slate-100 pb-2.5">
+                <span className="text-red-500 font-bold shrink-0">✕</span>
+                <span>Employees forget to hit "Start Timer" and guess their hours at week's end.</span>
+              </li>
+              <li className="flex items-start gap-2.5 border-b border-slate-100 pb-2.5">
+                <span className="text-red-500 font-bold shrink-0">✕</span>
+                <span>Managers send awkward Slack messages every Friday afternoon asking for updates.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-red-500 font-bold shrink-0">✕</span>
+                <span>Client invoicing is delayed because timesheets remain unsubmitted over the weekend.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="grid-cell-highlight p-6 sm:p-8">
+            <div className="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 bg-rose-100 inline-block px-2.5 py-1 border border-rose-200">
+              THE VELOTIME WAY
+            </div>
+            <h3 className="text-xl font-extrabold text-slate-900">Zero-Friction Grid Adoption</h3>
+            <ul className="mt-4 space-y-3.5 text-xs sm:text-sm text-slate-700">
+              <li className="flex items-start gap-2.5 border-b border-rose-200/60 pb-2.5">
+                <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                <span>A single grid where the entire week is entered in under 10 seconds.</span>
+              </li>
+              <li className="flex items-start gap-2.5 border-b border-rose-200/60 pb-2.5">
+                <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                <span>Keyboard-driven navigation—tab through cells just like a spreadsheet.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0">✓</span>
+                <span>100% compliance without nagging, surveillance, or awkward Friday reminders.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+
+      {/* ================= FEATURES GRID ================= */}
+      <section id="features" className="space-y-4 pt-2">
+        
+        <div className="grid-cell p-6 text-center border-2 border-slate-300">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Built to get completed.</h2>
+          <p className="mt-1.5 text-slate-600 text-sm max-w-xl mx-auto">
+            Features designed specifically to eliminate friction for employees and administrative overhead for managers.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 -space-y-px md:space-y-0 md:-space-x-px">
+          <div className="grid-cell p-6 sm:p-8">
+            <div className="w-10 h-10 bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 mb-4 font-extrabold text-sm">
+              10s
+            </div>
+            <h3 className="text-base font-extrabold text-slate-900">10-second weekly log</h3>
+            <p className="mt-2 text-slate-600 text-xs sm:text-sm leading-relaxed">
+              No dropdowns or form popups. Fill out your entire week's matrix in the time it takes your coffee to brew.
             </p>
           </div>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-md)' }}>
-            
-            <div className="glass-panel hover-lift">
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'var(--brand-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)', marginBottom: '1.5rem' }}>
-                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-              </div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Lightning Fast Matrix</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Log your entire week in seconds. Navigate exclusively via keyboard shortcuts with our bespoke spreadsheet-like interface.</p>
-            </div>
 
-            <div className="glass-panel hover-lift">
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'var(--brand-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)', marginBottom: '1.5rem' }}>
-                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg>
-              </div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Privacy-First Philosophy</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>We believe in trusting employees. No invasive screen recordings, no keystroke tracking. Just honest, frictionless time logging.</p>
+          <div className="grid-cell p-6 sm:p-8">
+            <div className="w-10 h-10 bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 mb-4 font-extrabold text-sm">
+              0%
             </div>
+            <h3 className="text-base font-extrabold text-slate-900">Respects developer trust</h3>
+            <p className="mt-2 text-slate-600 text-xs sm:text-sm leading-relaxed">
+              Zero screen capturing, keylogging, or automated spying. Keep senior engineers happy with honest data entry.
+            </p>
+          </div>
 
-            <div className="glass-panel hover-lift">
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: 'var(--brand-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--brand-primary)', marginBottom: '1.5rem' }}>
-                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
-              </div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>Agency Profitability</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Track billable hours effortlessly and generate beautiful reports. Stop losing money to untracked minutes.</p>
+          <div className="grid-cell p-6 sm:p-8">
+            <div className="w-10 h-10 bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 mb-4 font-extrabold text-sm">
+              $=
             </div>
-
+            <h3 className="text-base font-extrabold text-slate-900">Instant margin reports</h3>
+            <p className="mt-2 text-slate-600 text-xs sm:text-sm leading-relaxed">
+              Once timesheets are saved, project margins and billable hours update automatically for immediate invoicing.
+            </p>
           </div>
         </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="gradient-blob" style={{ bottom: '-20%', right: '10%', width: '40vw', height: '40vw', background: 'var(--brand-glow)', animationDelay: '-2s' }}></div>
-        <div className="container flex flex-col items-center text-center">
-          <h2 className="h1">Ready to reclaim your time?</h2>
-          <p className="subtitle" style={{ margin: '1.5rem auto 2.5rem auto' }}>Join the remote teams and agencies that have switched to VeloTime's frictionless timesheet software.</p>
-          <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '1.25rem 3rem', fontSize: '1.125rem' }}>Get Started Free</a>
-        </div>
+
       </section>
 
-      {/* Comparisons Section */}
-      <section id="compare" className="section" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="gradient-blob" style={{ bottom: '-10%', right: '-10%', width: '40vw', height: '40vw', background: 'rgba(59, 130, 246, 0.1)' }}></div>
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: 'var(--space-xl)' }}>
-            <h2 className="h2">See how we stack up</h2>
-            <p className="subtitle" style={{ margin: '0 auto' }}>If you are tired of your current software, check out why agencies are switching to VeloTime.</p>
+      {/* ================= COMPETITOR COMPARISON GRID ================= */}
+      <section id="compare" className="grid-cell p-6 sm:p-8 border-2 border-slate-300">
+        <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+          <div>
+            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Stop chasing timesheets</h2>
+            <p className="text-xs text-slate-500 mt-0.5">See why managers switch to VeloTime for better compliance.</p>
           </div>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--space-md)' }}>
-            
-            <a href="/compare/toggl" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>⏱️</div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Toggl</h3>
-              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
-            </a>
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider hidden sm:inline-block">BENCHMARK MATRIX</span>
+        </div>
 
-            <a href="/compare/harvest" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>🌾</div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Harvest</h3>
-              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
-            </a>
-
-            <a href="/compare/hubstaff" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>👁️</div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Hubstaff</h3>
-              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
-            </a>
-
-            <a href="/compare/clockify" className="glass-panel hover-lift" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1.5rem' }}>⏰</div>
-              <h3 className="h3" style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>VeloTime vs Clockify</h3>
-              <p style={{ color: 'var(--brand-primary)', fontWeight: 600, fontSize: '0.875rem' }}>Read Comparison &rarr;</p>
-            </a>
-            
-          </div>
+        <div className="overflow-x-auto border border-slate-300 bg-white">
+          <table className="w-full text-left text-xs border-collapse min-w-[600px]">
+            <thead>
+              <tr className="border-b border-slate-300 text-slate-700 uppercase tracking-wider bg-slate-100 text-[11px] font-bold">
+                <th className="p-3 border-r border-slate-300">Metric</th>
+                <th className="p-3 bg-rose-50 text-slate-900 font-bold border-x border-rose-200">VeloTime</th>
+                <th className="p-3 text-slate-500 font-medium border-r border-slate-300">
+                  <a href="/compare/toggl" className="hover:text-slate-900 underline">Toggl Track</a>
+                </th>
+                <th className="p-3 text-slate-500 font-medium border-r border-slate-300">
+                  <a href="/compare/harvest" className="hover:text-slate-900 underline">Harvest</a>
+                </th>
+                <th className="p-3 text-slate-500 font-medium border-r border-slate-300">
+                  <a href="/compare/hubstaff" className="hover:text-slate-900 underline">Hubstaff</a>
+                </th>
+                <th className="p-3 text-slate-500 font-medium">
+                  <a href="/compare/clockify" className="hover:text-slate-900 underline">Clockify</a>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200 text-slate-700">
+              <tr>
+                <td className="p-3 font-bold text-slate-900 border-r border-slate-200 bg-slate-50">Friday Nag Factor</td>
+                <td className="p-3 bg-rose-50/40 text-emerald-700 font-bold border-x border-rose-200">Zero Reminders Needed</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">High (Forgotten Timers)</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">High (Chasing Entries)</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">High (App Dislikes)</td>
+                <td className="p-3 text-slate-600">High (Forgotten Timers)</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-bold text-slate-900 border-r border-slate-200 bg-slate-50">Data Entry Method</td>
+                <td className="p-3 bg-rose-50/40 text-rose-700 font-bold border-x border-rose-200">Bulk Matrix Grid (&lt; 10s)</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">Manual Stopwatch</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">Single Form Popups</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">Desktop Background App</td>
+                <td className="p-3 text-slate-600">Manual Stopwatch</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-bold text-slate-900 border-r border-slate-200 bg-slate-50">Surveillance Policy</td>
+                <td className="p-3 bg-rose-50/40 text-emerald-700 font-bold border-x border-rose-200">100% Privacy First</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">Privacy First</td>
+                <td className="p-3 text-slate-600 border-r border-slate-200">Privacy First</td>
+                <td className="p-3 text-red-600 font-bold text-[11px] border-r border-slate-200">⚠️ Screen Capture</td>
+                <td className="p-3 text-slate-600">Privacy First</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
-      {/* Inquiries Section */}
-      <section id="inquire" className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="container flex flex-col items-center text-center">
-          <h2 className="h2 mb-4">Questions? Reach Out.</h2>
-          <p className="subtitle mx-auto mb-8" style={{ margin: '0 auto 2rem auto', maxWidth: '600px' }}>
-            Interested in deploying VeloTime for your entire agency? Fill out the form below and we'll get in touch to discuss enterprise features, onboarding, and customized deployments.
-          </p>
-          <InquiryForm />
+      {/* ================= ENTERPRISE FORM ================= */}
+      <section className="grid-cell p-6 sm:p-8 max-w-xl mx-auto border-2 border-slate-300">
+        <div className="text-center max-w-md mx-auto">
+          <h2 className="text-2xl font-extrabold text-slate-900">Get your team to 100% compliance.</h2>
+          <p className="mt-1 text-slate-600 text-xs">Start your 14-day trial or talk to us about team workspace onboarding.</p>
+
+          <form onSubmit={handleInquiry} className="mt-6 text-left space-y-3.5">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">NAME</label>
+              <input 
+                type="text" required 
+                value={formData.name}
+                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Jane Doe" 
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:border-rose-600 text-xs font-sans" 
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">WORK EMAIL</label>
+              <input 
+                type="email" required 
+                value={formData.email}
+                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                placeholder="jane@company.com" 
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:border-rose-600 text-xs font-sans" 
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 mb-1">TEAM SIZE</label>
+              <select 
+                value={formData.teamSize || '1-10'}
+                onChange={e => setFormData({ ...formData, teamSize: e.target.value })}
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:border-rose-600 text-xs font-sans"
+              >
+                <option value="1-10">1 - 10 employees</option>
+                <option value="11-50">11 - 50 employees</option>
+                <option value="50+">50+ employees</option>
+              </select>
+            </div>
+            
+            {formStatus === 'error' && (
+              <div className="text-red-600 text-xs font-bold mt-2">
+                Error: {errorMessage || 'Failed to submit inquiry.'}
+              </div>
+            )}
+
+            <button 
+              type="submit" 
+              disabled={formStatus === 'loading'}
+              className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-500 text-white font-bold transition-colors text-xs mt-2 border border-slate-900"
+            >
+              {formStatus === 'loading' ? 'Submitting...' : 'Start Free Trial →'}
+            </button>
+            
+            {formStatus === 'success' && (
+              <div className="text-center text-xs text-emerald-600 mt-2 font-bold">
+                ✓ Inquiry received. We'll reach out shortly.
+              </div>
+            )}
+          </form>
         </div>
       </section>
-    </>
+
+    </main>
   );
 }

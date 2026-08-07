@@ -7,15 +7,14 @@ export const metadata = {
 
 export default function CookiesPage() {
   return (
-    <div className="section" style={{ minHeight: '80vh', backgroundColor: '#f9fafb', padding: '4rem 1rem' }}>
-      <div className="container" style={{ maxWidth: '800px', backgroundColor: 'white', padding: '3rem', borderRadius: '1rem', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
-        <h1 className="h1 mb-6 text-gray-900">Cookie Policy</h1>
+    <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20">
+      <section className="grid-cell p-8 sm:p-14 border-2 border-slate-300">
+        <h1 className="text-3xl font-extrabold text-slate-900 mb-8 tracking-tight">Cookie Policy</h1>
         <div 
-          className="max-w-none"
-          style={{ color: '#374151', lineHeight: '1.6', fontSize: '1rem' }}
+          className="prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed"
           dangerouslySetInnerHTML={{ __html: cookiesHtml }} 
         />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

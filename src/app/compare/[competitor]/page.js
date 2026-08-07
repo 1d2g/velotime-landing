@@ -44,76 +44,79 @@ export default async function ComparePage({ params }) {
   }
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
-        <div className="gradient-blob" style={{ top: '10%', right: '10%', width: '40vw', height: '40vw', background: 'var(--brand-glow)' }}></div>
-        
-        <div className="container flex flex-col items-center text-center animate-fade-up">
-          <div className="glass-panel" style={{ padding: '0.5rem 1rem', borderRadius: '100px', marginBottom: 'var(--space-md)', fontSize: '0.875rem', fontWeight: 600, color: 'var(--brand-primary)', border: '1px solid var(--brand-glow)' }}>
-            ✨ The Frictionless {competitor.name} Alternative
-          </div>
-          
-          <h1 className="h1">
-            Tired of {competitor.name}? <br />
-            <span className="text-gradient">Switch to VeloTime.</span>
-          </h1>
-          
-          <p className="subtitle mt-4 mb-8" style={{ margin: '1.5rem auto 2.5rem auto' }}>
-            If you're frustrated by {competitor.weakness}, it's time for an upgrade. VeloTime is the frictionless timesheet tool built specifically for high-performing remote teams.
-          </p>
-          
-          <div className="flex items-center justify-center gap-md">
-            <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1.125rem' }}>Start Free Trial</a>
-          </div>
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 space-y-12">
+      
+      {/* Hero Header Cell Block */}
+      <section className="grid-cell p-8 sm:p-14 text-center border-2 border-slate-300">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold mb-6">
+          <span className="w-2 h-2 bg-rose-500"></span>
+          THE FRICTIONLESS ALTERNATIVE
+        </div>
+
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 max-w-4xl mx-auto leading-[1.12]">
+          Tired of {competitor.name}?<br />Switch to VeloTime.
+        </h1>
+
+        <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          If you're frustrated by {competitor.weakness}, it's time for an upgrade. VeloTime is the frictionless timesheet tool built specifically for high-performing remote teams.
+        </p>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="https://app.velotime.dg.tools" className="w-full sm:w-auto px-7 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 border border-slate-900">
+            <span>Start 14-day free trial</span>
+            <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <Link href="/#interactive-matrix" className="w-full sm:w-auto px-7 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs transition-colors">
+            See how it works
+          </Link>
         </div>
       </section>
 
-      {/* Comparison Grid */}
-      <section className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-subtle)' }}>
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: 'var(--space-xl)' }}>
-            <h2 className="h2">Why agencies are leaving {competitor.name}</h2>
+      {/* Comparison Split Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 -space-y-px md:space-y-0 md:-space-x-px">
+        <div className="grid-cell p-6 sm:p-8">
+          <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 bg-slate-100 inline-block px-2.5 py-1 border border-slate-200">
+            {competitor.name.toUpperCase()}
           </div>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'var(--space-md)' }}>
-            
-            <div className="glass-panel hover-lift" style={{ border: '1px solid #ef444430' }}>
-              <h3 className="h3" style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
-                {competitor.name}
-              </h3>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <li style={{ color: 'var(--text-secondary)' }}>❌ Known for {competitor.focus}</li>
-                <li style={{ color: 'var(--text-secondary)' }}>❌ Slow, mouse-heavy navigation</li>
-                <li style={{ color: 'var(--text-secondary)' }}>❌ Punishes you with high per-seat fees as you scale</li>
-              </ul>
-            </div>
+          <h3 className="text-xl font-extrabold text-slate-900 mb-4">Why agencies leave</h3>
+          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-600">
+            <li className="flex items-start gap-2.5 border-b border-slate-100 pb-2.5">
+              <span className="text-slate-400 font-bold shrink-0">✕</span>
+              <span>Known for {competitor.focus}.</span>
+            </li>
+            <li className="flex items-start gap-2.5 border-b border-slate-100 pb-2.5">
+              <span className="text-slate-400 font-bold shrink-0">✕</span>
+              <span>Slow, mouse-heavy navigation that annoys engineers.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-slate-400 font-bold shrink-0">✕</span>
+              <span>Often results in Friday afternoon "chasing" for compliance.</span>
+            </li>
+          </ul>
+        </div>
 
-            <div className="glass-panel hover-lift" style={{ border: '1px solid var(--brand-primary)' }}>
-              <div style={{ position: 'absolute', top: '-12px', right: '20px', background: 'var(--brand-primary)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 'bold' }}>Our Approach</div>
-              <h3 className="h3" style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--brand-primary)' }}>
-                VeloTime
-              </h3>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <li style={{ color: 'var(--text-primary)' }}>✅ Privacy-first philosophy. Trust your team.</li>
-                <li style={{ color: 'var(--text-primary)' }}>✅ Lightning-fast spreadsheet matrix (keyboard only)</li>
-                <li style={{ color: 'var(--text-primary)' }}>✅ Transparent, agency-friendly pricing</li>
-              </ul>
-            </div>
-            
+        <div className="grid-cell-highlight p-6 sm:p-8">
+          <div className="text-xs font-bold text-rose-700 uppercase tracking-wider mb-3 bg-rose-100 inline-block px-2.5 py-1 border border-rose-200">
+            VELOTIME
           </div>
+          <h3 className="text-xl font-extrabold text-slate-900 mb-4">The Better Way</h3>
+          <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
+            <li className="flex items-start gap-2.5 border-b border-rose-200/60 pb-2.5">
+              <span className="text-emerald-600 font-bold shrink-0">✓</span>
+              <span>Lightning-fast spreadsheet matrix (keyboard driven).</span>
+            </li>
+            <li className="flex items-start gap-2.5 border-b border-rose-200/60 pb-2.5">
+              <span className="text-emerald-600 font-bold shrink-0">✓</span>
+              <span>Privacy-first philosophy. Trust your team, zero surveillance.</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-600 font-bold shrink-0">✓</span>
+              <span>Achieve near 100% compliance without nagging.</span>
+            </li>
+          </ul>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="gradient-blob" style={{ bottom: '-20%', left: '10%', width: '40vw', height: '40vw', background: 'rgba(139, 92, 246, 0.15)', animationDelay: '-2s' }}></div>
-        <div className="container flex flex-col items-center text-center">
-          <h2 className="h1">Ready to reclaim your time?</h2>
-          <p className="subtitle" style={{ margin: '1.5rem auto 2.5rem auto' }}>Make the switch from {competitor.name} today and see why agencies love VeloTime.</p>
-          <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '1.25rem 3rem', fontSize: '1.125rem' }}>Get Started Free</a>
-        </div>
-      </section>
-    </>
+    </main>
   );
 }

@@ -1,19 +1,23 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
 });
 
 export const metadata = {
-  title: "VeloTime | Frictionless Timesheet Software & Privacy-First Time Tracking",
-  description: "VeloTime is the premium, frictionless time tracking tool for agencies and remote teams. Ditch manual data entry with our privacy-first timesheet software.",
-  keywords: ["frictionless timesheet software", "effortless timesheets", "privacy-first time tracking", "time tracking for agencies", "no-click time tracking"],
+  metadataBase: new URL('https://velotime.dg.tools'),
+  title: "VeloTime | Timesheets Your Team Won't Hate Filling Out",
+  description: "VeloTime swaps clunky stopwatches and multi-step forms for a spreadsheet-fast matrix. Zero friction for your team, zero Friday chasing for you.",
   openGraph: {
-    title: "VeloTime | Premium Timesheet Software",
-    description: "The fastest, frictionless time tracking tool for agencies and remote teams.",
+    title: "VeloTime | Timesheets Your Team Won't Hate Filling Out",
+    description: "VeloTime swaps clunky stopwatches and multi-step forms for a spreadsheet-fast matrix.",
     url: "https://velotime.dg.tools",
     siteName: "VeloTime",
     images: [
@@ -29,7 +33,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "VeloTime | Premium Timesheet Software",
+    title: "VeloTime | Timesheets Your Team Won't Hate Filling Out",
     description: "The fastest, frictionless time tracking tool for agencies and remote teams.",
     images: ["https://velotime.dg.tools/og-image.jpg"],
   },
@@ -45,56 +49,75 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body>
-        <nav className="navbar" style={{ 
-          width: '100%', 
-          padding: '1rem 0', 
-          position: 'fixed', 
-          top: 0, 
-          zIndex: 50,
-          background: 'var(--glass-bg)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid var(--glass-border)'
-        }}>
-          <div className="container flex items-center justify-between" style={{ width: '100%' }}>
-            <a href="/" className="font-bold text-xl tracking-tight flex items-center gap-2">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--brand-primary)' }}>
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              VeloTime
-            </a>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
+      <body className="min-h-screen antialiased bg-slate-50 text-slate-900 pb-20">
+        {/* HEADER */}
+        <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b-2 border-slate-300">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             
-            <div className="flex items-center gap-md" style={{ color: 'var(--text-secondary)' }}>
-              {/* Hide on mobile, show on tablet+ */}
-              <style>{`
-                @media (max-width: 768px) {
-                  .desktop-only { display: none !important; }
-                }
-              `}</style>
-              <a href="/#features" className="desktop-only" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Features</a>
-              <a href="/#compare" className="desktop-only" style={{ fontSize: '0.875rem', fontWeight: 600 }}>Compare</a>
+            {/* LOGO */}
+            <a href="/" className="flex items-center gap-3 group">
+              <svg className="w-8 h-8 transition-transform duration-200 group-hover:scale-105 shrink-0" viewBox="0 0 200 200" fill="none">
+                <rect width="200" height="200" fill="#0F172A"/>
+                <path d="M 60 48 L 140 48 L 155 63 L 155 72 H 45 V 63 Z" fill="#F43F5E"/>
+                <path d="M 90 72 H 110 V 94 H 90 Z" fill="#F43F5E"/>
+                <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
+              </svg>
+              <span className="font-extrabold text-base tracking-[0.18em] uppercase font-sans select-none hidden sm:inline-block">
+                <span className="text-slate-900">VELO</span><span className="text-rose-600">TIME</span>
+              </span>
+            </a>
+
+            {/* NAVIGATION LINKS */}
+            <nav className="hidden md:flex items-center text-xs font-semibold text-slate-700 bg-slate-100 border border-slate-300">
+              <a href="/#interactive-matrix" className="px-4 py-2 hover:bg-white hover:text-slate-900 border-r border-slate-300 transition-colors">10-Sec Matrix</a>
+              <a href="/#why-adoption" className="px-4 py-2 hover:bg-white hover:text-slate-900 border-r border-slate-300 transition-colors">Why Adoption</a>
+              <a href="/#features" className="px-4 py-2 hover:bg-white hover:text-slate-900 border-r border-slate-300 transition-colors">Features</a>
+              <a href="/#compare" className="px-4 py-2 hover:bg-white hover:text-slate-900 transition-colors">Comparisons</a>
+            </nav>
+
+            {/* CTAs */}
+            <div className="flex items-center gap-2">
+              <a href="https://app.velotime.dg.tools" className="hidden sm:inline-flex px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 transition-colors">
+                Sign In
+              </a>
+              <a href="https://app.velotime.dg.tools" className="inline-flex items-center justify-center px-4 py-2 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 transition-colors border border-slate-900">
+                Start Free Trial
+              </a>
             </div>
 
-            <div className="flex items-center gap-sm">
-              <a href="https://app.velotime.dg.tools" className="btn desktop-only" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Sign In</a>
-              <a href="https://app.velotime.dg.tools" className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }}>Start Free</a>
-            </div>
           </div>
-        </nav>
-        <main style={{ paddingTop: '80px' }}>
-          {children}
-        </main>
-        
-        <footer className="section" style={{ borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-secondary)', padding: 'var(--space-lg) 0' }}>
-          <div className="container flex flex-col items-center justify-center gap-sm text-center">
-            <div className="flex items-center gap-md font-medium text-sm" style={{ color: 'var(--text-secondary)' }}>
-              <a href="/privacy" className="hover:text-blue-500">Privacy Policy</a>
-              <a href="/terms" className="hover:text-blue-500">Terms of Service</a>
-              <a href="/cookies" className="hover:text-blue-500">Cookie Policy</a>
+        </header>
+
+        {/* MAIN CONTENT (Handled by pages) */}
+        {children}
+
+        {/* FOOTER */}
+        <footer className="mt-16 py-8 bg-white border-t-2 border-slate-300 text-slate-600 text-xs">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div className="flex items-center gap-2.5">
+              <svg className="w-6 h-6 shrink-0" viewBox="0 0 200 200" fill="none">
+                <rect width="200" height="200" fill="#0F172A"/>
+                <path d="M 60 48 L 140 48 L 155 63 L 155 72 H 45 V 63 Z" fill="#F43F5E"/>
+                <path d="M 90 72 H 110 V 94 H 90 Z" fill="#F43F5E"/>
+                <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
+              </svg>
+              <span className="font-bold text-xs tracking-[0.18em] uppercase font-sans">
+                <span className="text-slate-900">VELO</span><span className="text-rose-600">TIME</span>
+              </span>
             </div>
-            <p className="text-sm mt-4" style={{ color: 'var(--text-tertiary)' }}>VeloTime LLC</p>
+
+            <div className="flex items-center gap-5 text-slate-600 font-medium">
+              <a href="/privacy" className="hover:text-slate-900 transition-colors">Privacy</a>
+              <a href="/terms" className="hover:text-slate-900 transition-colors">Terms</a>
+              <a href="/cookies" className="hover:text-slate-900 transition-colors">Cookies</a>
+            </div>
+
+            <div className="text-slate-500 font-sans">
+              &copy; {new Date().getFullYear()} VeloTime Software
+            </div>
+
           </div>
         </footer>
       </body>
