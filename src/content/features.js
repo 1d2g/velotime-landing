@@ -1,39 +1,39 @@
 export const features = [
   {
     slug: 'weekly-matrix',
-    name: 'Spreadsheet Matrix Grid',
-    highlight: 'The core 10-second weekly logging interface with real-time recalculation.',
-    detail: 'A lightning-fast, spreadsheet-style interface that lets your team log an entire week of hours in seconds.',
+    name: '10-Second Matrix Grid',
+    highlight: 'The core interface built specifically because we hate filling out forms.',
+    detail: 'A lightning-fast, spreadsheet-style grid that gets out of your way. Log an entire week of hours in under 10 seconds.',
   },
   {
     slug: 'keyboard-shortcuts',
     name: 'Hotkey Engine',
-    highlight: 'Complete keyboard navigation guide (Tab, Enter, Arrow navigation).',
-    detail: 'Power users can navigate entirely via keyboard, making data entry completely frictionless.',
+    highlight: 'Never touch your mouse to track time again.',
+    detail: 'Built for developers and power users. Navigate the entire application using Tab, Enter, and Arrow keys.',
   },
   {
     slug: 'margin-reports',
     name: 'Real-Time Margin Analytics',
-    highlight: 'Utilization rates, team capacity, and billable vs. non-billable breakdowns.',
-    detail: 'Instantly view project profitability and employee utilization without exporting to Excel.',
+    highlight: 'Accurate timesheets lead directly to accurate profitability insights.',
+    detail: 'Because VeloTime is so frictionless, your data is actually complete. Instantly view true project profitability.',
   },
   {
     slug: 'client-invoicing',
     name: 'One-Click Invoicing',
-    highlight: 'Turn matrix entries into clean, audit-proof client invoices.',
-    detail: 'Generate PDF or CSV invoices directly from approved timesheets in a single click.',
+    highlight: 'Turn a perfectly complete timesheet into cash.',
+    detail: 'Generate clean, audit-proof PDF or CSV invoices directly from approved timesheets without opening Excel.',
   },
   {
-    slug: 'clerk-sso',
-    name: 'Enterprise SSO Security',
-    highlight: 'Bank-grade security and authentication powered by Clerk.',
-    detail: 'Seamlessly integrate with Google, Microsoft, and SAML providers for frictionless onboarding.',
+    slug: 'enterprise-security',
+    name: 'Enterprise Organization Tools',
+    highlight: 'We have all the same enterprise organizational features as the big guys.',
+    detail: 'Role-based permissions, manager approvals, and bank-grade SSO security powered by Clerk.',
   },
   {
     slug: 'offline-mode',
     name: 'Offline Resilience',
-    highlight: 'Track time on an airplane. Syncs when you reconnect.',
-    detail: 'Never lose a timesheet due to a spotty internet connection again.',
+    highlight: 'Track time on a train. It syncs when you reconnect.',
+    detail: 'Never lose a timesheet to a spotty internet connection again. VeloTime caches your entries locally until you\'re back online.',
   }
 ];
 

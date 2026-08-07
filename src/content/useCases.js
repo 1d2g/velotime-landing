@@ -2,38 +2,38 @@ export const useCases = [
   {
     slug: 'friday-compliance',
     name: 'Friday Timesheet Chasing',
-    copyAngle: 'Get 100% on-time submission. Eliminate the need to send awkward Slack messages every Friday afternoon.',
-    highlight: 'Frictionless entry means your team actually does it.',
+    copyAngle: 'Stop the Friday afternoon Slack messages. VeloTime takes 10 seconds to fill out, meaning your team actually does it.',
+    highlight: 'Frictionless entry guarantees 100% on-time submission.',
   },
   {
     slug: 'billable-utilization',
     name: 'Margin & Utilization Tracking',
-    copyAngle: 'Stop losing billable hours. Instantly see which projects are over budget and which clients drive profit.',
-    highlight: 'Live margin dashboards keep you profitable.',
+    copyAngle: 'You can\'t measure profitability with missing timesheets. When entry is frictionless, you capture every billable hour.',
+    highlight: 'Complete data means accurate margin dashboards.',
   },
   {
     slug: 'privacy-first-tracking',
     name: 'Surveillance Alternatives',
-    copyAngle: 'Time tracking without spying. How employee-trust software dramatically increases timesheet completion rates.',
+    copyAngle: 'Built by people who hate being micromanaged. Trust your team and they will give you perfectly accurate time logs.',
     highlight: 'Zero screenshots, keystroke logs, or creepy tracking.',
   },
   {
     slug: 'keyboard-time-entry',
     name: 'High-Velocity Data Entry',
-    copyAngle: 'Log hours at the speed of thought. Full keyboard hotkey matrix for power users.',
-    highlight: 'Never touch your mouse to track time again.',
+    copyAngle: 'Log your entire week without touching your mouse. The fastest spreadsheet matrix designed for power users.',
+    highlight: 'Built by developers who hate admin work.',
   },
   {
     slug: 'capacity-planning',
     name: 'Team Capacity Planning',
-    copyAngle: 'Know exactly who has bandwidth for new projects before you commit to deadlines.',
-    highlight: 'Clear visualization of workload distribution.',
+    copyAngle: 'Accurate timesheets give you the truth about your team\'s bandwidth, letting you take on new projects safely.',
+    highlight: 'Clear workload visibility driven by reliable data.',
   },
   {
     slug: 'timesheet-automation',
     name: 'Timesheet Automation',
-    copyAngle: 'Automate the tedious parts of time tracking with recurring project assignments.',
-    highlight: 'Less manual configuration every week.',
+    copyAngle: 'Timesheets suck. Let VeloTime automate the tedious parts with recurring assignments and hotkeys.',
+    highlight: 'The ultimate anti-timesheet timesheet.',
   }
 ];
 
