@@ -17,19 +17,19 @@ export const features = [
     highlight: 'Accurate timesheets lead directly to accurate profitability insights.',
     detail: 'Because VeloTime is so frictionless, your data is actually complete. Instantly view true project profitability.',
   },
-  /*
   {
     slug: 'client-invoicing',
-    name: 'One-Click Invoicing',
-    highlight: 'Turn a perfectly complete timesheet into cash.',
-    detail: 'Generate clean, audit-proof PDF or CSV invoices directly from approved timesheets without opening Excel.',
+    name: 'Invoice Drafting',
+    highlight: 'Turn a perfectly complete timesheet into a clean invoice draft.',
+    detail: 'Draft and print clean, audit-proof PDF invoices directly from approved timesheets. Perfect for quick billing without the bloat.',
   },
   {
-    slug: 'enterprise-security',
-    name: 'Enterprise Organization Tools',
-    highlight: 'We have all the same enterprise organizational features as the big guys.',
-    detail: 'Role-based permissions, manager approvals, and bank-grade SSO security powered by Clerk.',
+    slug: 'organization-tools',
+    name: 'Organizational Tools',
+    highlight: 'Manage teams, projects, and permissions without the enterprise bloat.',
+    detail: 'Keep your team aligned with essential project tracking and organizational settings, designed for speed and simplicity.',
   },
+  /*
   {
     slug: 'offline-mode',
     name: 'Offline Resilience',
