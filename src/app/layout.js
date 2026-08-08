@@ -18,6 +18,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata = {
   metadataBase: new URL('https://velotime.dg.tools'),
+  alternates: {
+    canonical: '/',
+  },
   title: "VeloTime | Timesheets Your Team Won't Hate Filling Out",
   description: "VeloTime swaps clunky stopwatches and multi-step forms for a spreadsheet-fast matrix. Zero friction for your team, zero Friday chasing for you.",
   openGraph: {
