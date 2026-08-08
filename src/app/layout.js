@@ -71,7 +71,7 @@ export default function RootLayout({ children }) {
                 <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
               </svg>
               <span className="font-extrabold text-base tracking-[0.18em] uppercase font-sans select-none hidden sm:inline-block">
-                <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-primary-600">TIME</span>
+                <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-rose-600">TIME</span>
               </span>
             </a>
 
@@ -164,7 +164,7 @@ export default function RootLayout({ children }) {
                   <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
                 </svg>
                 <span className="font-bold text-xs tracking-[0.18em] uppercase font-sans">
-                  <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-primary-600">TIME</span>
+                  <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-rose-600">TIME</span>
                 </span>
               </div>
 
