@@ -1,6 +1,5 @@
 import './globals.css';
 import { Inter, JetBrains_Mono } from 'next/font/google';
-import ThemeCycler from '@/components/ThemeCycler';
 import { competitors } from '../content/competitors';
 import { personas } from '../content/personas';
 import { useCases } from '../content/useCases';
@@ -72,7 +71,7 @@ export default function RootLayout({ children }) {
                 <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
               </svg>
               <span className="font-extrabold text-base tracking-[0.18em] uppercase font-sans select-none hidden sm:inline-block">
-                <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-rose-600">TIME</span>
+                <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-primary-600">TIME</span>
               </span>
             </a>
 
@@ -86,7 +85,6 @@ export default function RootLayout({ children }) {
 
             {/* CTAs */}
             <div className="flex items-center gap-2">
-              <ThemeCycler />
               <a href="https://app.velotime.dg.tools" className="hidden sm:inline-flex px-3.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-slate-100 transition-colors">
                 Sign In
               </a>
@@ -112,7 +110,7 @@ export default function RootLayout({ children }) {
                 <ul className="space-y-2.5">
                   {competitors.map(c => (
                     <li key={c.slug}>
-                      <a href={`/compare/${c.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">VeloTime vs {c.name}</a>
+                      <a href={`/compare/${c.slug}`} className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">VeloTime vs {c.name}</a>
                     </li>
                   ))}
                 </ul>
@@ -124,7 +122,7 @@ export default function RootLayout({ children }) {
                 <ul className="space-y-2.5">
                   {personas.map(p => (
                     <li key={p.slug}>
-                      <a href={`/for/${p.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">{p.name}</a>
+                      <a href={`/for/${p.slug}`} className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{p.name}</a>
                     </li>
                   ))}
                 </ul>
@@ -136,7 +134,7 @@ export default function RootLayout({ children }) {
                 <ul className="space-y-2.5">
                   {useCases.map(u => (
                     <li key={u.slug}>
-                      <a href={`/use-case/${u.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">{u.name}</a>
+                      <a href={`/use-case/${u.slug}`} className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{u.name}</a>
                     </li>
                   ))}
                 </ul>
@@ -148,7 +146,7 @@ export default function RootLayout({ children }) {
                 <ul className="space-y-2.5">
                   {features.map(f => (
                     <li key={f.slug}>
-                      <a href={`/features/${f.slug}`} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">{f.name}</a>
+                      <a href={`/features/${f.slug}`} className="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{f.name}</a>
                     </li>
                   ))}
                 </ul>
@@ -166,7 +164,7 @@ export default function RootLayout({ children }) {
                   <path d="M 45 94 H 68 L 100 132 L 132 94 H 155 L 110 148 C 105 153 95 153 90 148 Z" fill="#FFFFFF"/>
                 </svg>
                 <span className="font-bold text-xs tracking-[0.18em] uppercase font-sans">
-                  <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-rose-600">TIME</span>
+                  <span className="text-slate-900 dark:text-slate-100">VELO</span><span className="text-primary-600">TIME</span>
                 </span>
               </div>
 

@@ -82,7 +82,7 @@ export default async function FeaturePage({ params }) {
         <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4 uppercase tracking-wider text-xs">Explore other features</h3>
         <div className="flex flex-wrap gap-2">
           {features.filter(f => f.slug !== feature.slug).map(f => (
-            <Link key={f.slug} href={`/features/${f.slug}`} className="px-3 py-1.5 bg-slate-100 dark:bg-zinc-800 hover:bg-rose-50 dark:hover:bg-rose-900/30 text-slate-700 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 text-xs font-medium border border-slate-200 dark:border-zinc-700 transition-colors">
+            <Link key={f.slug} href={`/features/${f.slug}`} className="px-3 py-1.5 bg-slate-100 dark:bg-zinc-800 hover:bg-primary-50 dark:hover:bg-primary-900/30 text-slate-700 dark:text-slate-300 hover:text-primary-700 dark:hover:text-primary-400 text-xs font-medium border border-slate-200 dark:border-zinc-700 transition-colors">
               {f.name}
             </Link>
           ))}
